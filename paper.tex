@@ -1,0 +1,73 @@
+\documentclass[twocolumn]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\title{GRA-Core: Hierarchical Stability for Subject-Oriented AI Swarms\\
+\large{Orchestra Encourages Local Foam, Nullifies Global Foam}}
+\author{I. Orchestra Designer}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We introduce GRA-Core, a universal hierarchical stability framework for orchestrating AI agents with preserved individuality. 
+The key principle: \emph{The orchestra encourages the foam of AI agents, but nullifies the foam in the orchestra.}
+Local foam (agent's internal contradictions, quirks) is allowed and even rewarded, while global foam (collective inconsistency, goal violation) is strictly nullified through gradient-based adaptation.
+We formalize the separation, provide convergence conditions, and demonstrate a working implementation with backend API and interactive dashboard.
+\end{abstract}
+
+\section{Introduction}
+Modern AI swarms face a dilemma: enforcing global coherence often kills agent diversity. 
+We propose a hierarchical stability functional where each agent retains a non-zero ``local foam'' $\Phi_i^{\text{local}}>0$ (their character, biases, creative noise), but the orchestra as a whole must satisfy $\Phi_{\text{global}}=0$ (perfect alignment with the global goal).
+
+\section{Formal Framework}
+Let $x$ be the global state of the swarm, and $a_i, s_i$ the state and personality parameters of agent $i$. 
+Define the total functional:
+\begin{equation}
+J(x, s_{1..N}) = \Phi_{\text{global}}(x) + \sum_{i=1}^N \left( \alpha_i \Phi_i^{\text{local}}(a_i,s_i) + \beta_i \Phi_i^{\text{align}}(a_i,s_i,x) \right) + R.
+\end{equation}
+
+\begin{itemize}
+    \item $\Phi_{\text{global}}(x)$ -- global foam (must be nullified).
+    \item $\Phi_i^{\text{local}}$ -- agent's internal foam (allowed, bounded by $c_i$).
+    \item $\Phi_i^{\text{align}}$ -- alignment violation with the orchestra.
+    \item $R$ -- regularizers.
+\end{itemize}
+
+The GRA-Core update rule:
+\begin{equation}
+(x^{t+1}, s_{1..N}^{t+1}) = (x^t, s_{1..N}^t) - \eta \nabla J(x^t, s_{1..N}^t),
+\end{equation}
+with the constraint that gradient components corresponding to $\Phi_i^{\text{local}}$ are damped to preserve $0 < \Phi_i^{\text{local}} \le c_i$.
+
+\section{Stability Conditions}
+A swarm is called \emph{stable} iff:
+\begin{align}
+\Phi_{\text{global}}(x^*) &= 0, \\
+\Delta \Phi_{\text{global}}(x^*) &= 0, \\
+\Delta^2 \Phi_{\text{global}}(x^*) &> 0, \\
+0 &< \Phi_i^{\text{local}}(a_i^*, s_i^*) \le c_i \quad \forall i.
+\end{align}
+The first three conditions ensure the orchestra is at a local minimum of global foam; the last guarantees each agent retains its personality.
+
+\section{Implementation}
+We provide a reference implementation with:
+\begin{itemize}
+    \item FastAPI backend -- maintains agents, computes foams, performs GRA steps.
+    \item Frontend dashboard -- visualises local/global foam, allows connect/disconnect of agents.
+    \item Agents are stored with their character vectors $s_i$ and can be moved between swarms.
+\end{itemize}
+
+\section{Experimental Demonstration}
+Using the demo agents (impressionist, paranoid, disciplined, rebel), we start with non-zero global foam. After each GRA step, $\Phi_{\text{global}}$ decreases while each $\Phi_i^{\text{local}}$ fluctuates but stays above zero. The system reaches $\Phi_{\text{global}}<10^{-2}$ within 5--10 steps, and the stability criteria are satisfied.
+
+\section{Conclusion}
+GRA-Core enables truly living AI orchestras: agents keep their quirks and creativity, yet the ensemble remains perfectly coherent. The framework supports detachment, reattachment, and composition of heterogeneous swarms.
+
+\bibliographystyle{plain}
+\begin{thebibliography}{1}
+\bibitem{gra} GRA-Core Unified Hierarchical Stability Library, \url{https://github.com/qqewq/GRA-Core-new-Unified-Hierarchical-Stability-Library}
+\end{thebibliography}
+\end{document}

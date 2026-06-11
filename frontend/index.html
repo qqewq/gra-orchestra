@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRA-Orchestra | Живой рой ИИ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎻 GRA-Orchestra</h1>
+        <p class="subtitle"><em>Оркестр поощряет пену ИИ-агентов, но обнуляет пену в оркестре</em></p>
+
+        <div class="orchestra-panel">
+            <h2>📯 Глобальная пена оркестра</h2>
+            <div class="metrics">
+                <div>Φ<sub>global</sub> = <span id="global_pena">—</span></div>
+                <div>ΔΦ = <span id="delta_global">—</span></div>
+                <div>Δ²Φ = <span id="delta2_global">—</span></div>
+                <div>Стабильность: <span id="stability">❓</span></div>
+            </div>
+            <button id="stepBtn">🎵 GRA-шаг (обнуление)</button>
+        </div>
+
+        <div class="agents-panel">
+            <h2>🤖 Агенты (каждый со своей пеной)</h2>
+            <div id="agentsList" class="agents-grid"></div>
+        </div>
+
+        <div class="footer">
+            <p>Принцип: локальная пена Φ<sub>i</sub><sup>local</sup> > 0 (характер, тараканы) — разрешена.<br>
+            Глобальная пена Φ<sub>global</sub> → 0 — обнуляется GRA-Core.</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
